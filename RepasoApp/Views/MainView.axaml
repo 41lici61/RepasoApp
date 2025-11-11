@@ -32,5 +32,10 @@
       <Button Content="login" Command="{Binding LoginUsuarioCommand}" CommandParameter="{Binding ElementName=ListBoxUsuarios, Path=SelectedItem}"></Button>
       <Button Content="registro" Command="{Binding RegisterUserCommand}"></Button>
       <Image Source="{Binding ImageURL}"/>
+      
+      <!--10/11 boton que inserta el producto-->
+      <Button Content="Crear Producto" Command="{Binding CrearProductoCommand}"></Button>
+      <Button Content="Crear Producto" Command="{Binding ObtenerProductoCommand}"></Button>
+      
   </StackPanel>
 </UserControl>
