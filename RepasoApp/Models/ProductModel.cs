@@ -8,7 +8,8 @@ public class ProductModel
     //ponerle los atributos de la tabla de la bbdd del puerto 7000
     //instalar Newtonsoft.Json
     
-    //[JsonProperty("id")] public string Id { get; set; } //da error
+    [JsonProperty("id", DefaultValueHandling = DefaultValueHandling.Ignore)] public string Id { get; set; } 
+    
     [JsonProperty("ref")] public string Ref { get; set; }
     [JsonProperty("color")] public string Color { get; set; }
     [JsonProperty("peso")] public decimal Peso { get; set; }

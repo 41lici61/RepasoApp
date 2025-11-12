@@ -4,38 +4,113 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:RepasoApp.ViewModels"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" 
              x:Class="RepasoApp.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+             x:DataType="vm:MainViewModel"
+             d:DesignWidth="900" d:DesignHeight="600">
 
-  <StackPanel>
-      <Button Content="mostar users" Command="{Binding ObtenerUsuariosCommand}"></Button>
-      <ListBox Name="ListBoxUsuarios" ItemsSource="{Binding ListaUsuarios}">
-          <ListBox.ItemTemplate>
-              <DataTemplate>
-                  <StackPanel Width="219">
-                      
-                      <!--AsyncImageLoader.Avalonia permite usar imagenes cn la url solo-->
-                      <Image HorizontalAlignment="Center" Width="117" Height="121" asyncImageLoader:ImageLoader.Source="{Binding ImageUrl}"/>
-                      <TextBlock FontSize="21" HorizontalAlignment="Right" Text="{Binding Email}"></TextBlock>
-                      <TextBlock FontSize="19" HorizontalAlignment="Left" Text="{Binding Nombre}"></TextBlock>
-                      
-                  </StackPanel>
-              </DataTemplate>
-          </ListBox.ItemTemplate>
-      </ListBox>
-      <Button Content="login" Command="{Binding LoginUsuarioCommand}" CommandParameter="{Binding ElementName=ListBoxUsuarios, Path=SelectedItem}"></Button>
-      <Button Content="registro" Command="{Binding RegisterUserCommand}"></Button>
-      <Image Source="{Binding ImageURL}"/>
-      
-      <!--10/11 boton que inserta el producto-->
-      <Button Content="Crear Producto" Command="{Binding CrearProductoCommand}"></Button>
-      <Button Content="Crear Producto" Command="{Binding ObtenerProductoCommand}"></Button>
-      
-  </StackPanel>
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <!-- Fondo general -->
+    <Grid Background="Black">
+
+        <!-- Layout principal dividido en 2 columnas -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Panel lateral izquierdo (login y botones) -->
+        <StackPanel Grid.Column="0" Margin="15" Spacing="10">
+            <TextBlock Text="Login" Foreground="Chartreuse" FontFamily="Consolas" FontSize="28"
+                       HorizontalAlignment="Center" />
+
+            <TextBlock Text="Name" Foreground="Chartreuse" FontFamily="Consolas" FontSize="18"/>
+            <TextBox Watermark="user" Foreground="Chartreuse" FontFamily="Consolas" FontSize="18"/>
+
+            <TextBlock Text="Password" Foreground="Chartreuse" FontFamily="Consolas" FontSize="18"/>
+            <TextBox Foreground="Chartreuse" FontFamily="Consolas" FontSize="18" PasswordChar="*"/>
+
+            <Button Content="Enter" Foreground="Chartreuse" HorizontalAlignment="Center" Margin="5"/>
+            <HyperlinkButton Content="Sign in" Command="{Binding openCommand}" 
+                             Foreground="Chartreuse" FontFamily="Consolas" FontSize="15"
+                             HorizontalAlignment="Center"/>
+
+            <Separator Margin="10"/>
+
+            <Button FontFamily="Consolas" Content="Mostrar Usuarios" Command="{Binding ObtenerUsuariosCommand}" Foreground="Chartreuse"/>
+            <Button FontFamily="Consolas" Content="Login" Command="{Binding LoginUsuarioCommand}" 
+                    CommandParameter="{Binding ElementName=ListBoxUsuarios, Path=SelectedItem}" Foreground="Chartreuse"/>
+            <Button FontFamily="Consolas" Content="Registro" Command="{Binding RegisterUserCommand}" Foreground="Chartreuse"/>
+
+            <Separator Margin="10"/>
+
+            <Button FontFamily="Consolas" Content="Crear Producto" Command="{Binding CrearProductoCommand}" Foreground="Chartreuse"/>
+            <Button FontFamily="Consolas" Content="Obtener Producto" Command="{Binding ObtenerProductoCommand}" Foreground="Chartreuse"/>
+            <Button FontFamily="Consolas" Content="Actualizar Producto" Command="{Binding ModificarProductoCommand}"
+                    CommandParameter="{Binding ElementName=ListaProductos, Path=SelectedItem}" Foreground="Chartreuse"/>
+            <Button FontFamily="Consolas" Content="Eliminar Producto" Command="{Binding EliminarProductoCommand}"
+                    CommandParameter="{Binding ElementName=ListaProductos, Path=SelectedItem}" Foreground="Chartreuse"/>
+        </StackPanel>
+
+        <!-- Panel derecho (listas y resultados) -->
+        <ScrollViewer Grid.Column="1" Margin="15">
+            <StackPanel Spacing="5" Background="Black">
+                <!-- Lista de usuarios -->
+                <TextBlock Text="Usuarios" Foreground="Chartreuse" FontFamily="Consolas" FontSize="20"/>
+                <ListBox Background="OliveDrab" Name="ListBoxUsuarios" ItemsSource="{Binding ListaUsuarios}" Height="180">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="300" Height="150" BorderBrush="Chartreuse" BorderThickness="2" CornerRadius="10"
+                                    Background="#202020" HorizontalAlignment="Center">
+                                <StackPanel HorizontalAlignment="Center" Margin="10" Background="Black">
+                                    <Image HorizontalAlignment="Center" Width="64" Height="64"
+                                           asyncImageLoader:ImageLoader.Source="{Binding ImageUrl}"/>
+                                    <StackPanel HorizontalAlignment="Center" Background="Black" Margin="10">
+                                        <TextBlock HorizontalAlignment="Center" FontFamily="Consolas" Text="{Binding Nombre}" Foreground="Chartreuse" FontSize="16"/>
+                                        <TextBlock HorizontalAlignment="Center" FontFamily="Consolas" Text="{Binding Email}" Foreground="LightGray" FontSize="14"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- Lista de productos -->
+                <TextBlock Text="Productos" Foreground="Chartreuse" FontFamily="Consolas" FontSize="20"/>
+                <ListBox Background="OliveDrab" Name="ListaProductos" ItemsSource="{Binding ListaProductos}" Height="250">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Background="Black" Orientation="Horizontal" Spacing="10">
+                                <Image Width="80" Height="80"
+                                       asyncImageLoader:ImageLoader.Source="https://tamagotchi-official.com/tamagotchi/jp/character/2024/05/08/bdkMGPP0UIz3N8TO/04_%E3%81%BE%E3%82%81%E3%81%A3%E3%81%A1.png"/>
+                                <StackPanel Margin="10" Background="Black">
+                                    <TextBlock FontFamily="Consolas" Text="{Binding Id}" Foreground="Chartreuse"/>
+                                    <TextBlock FontFamily="Consolas" Text="{Binding Color}" Foreground="Chartreuse"/>
+                                    <TextBlock FontFamily="Consolas" Text="{Binding Ref}" Foreground="Chartreuse"/>
+                                    <TextBlock FontFamily="Consolas" Text="{Binding Peso}" Foreground="Chartreuse"/>
+                                    <TextBlock FontFamily="Consolas" Text="{Binding Diametro}" Foreground="Chartreuse"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Overlay modal (solo visible cuando IsOpen es true) -->
+        <Grid x:Name="Overlay" IsVisible="{Binding IsOpen}" Background="#80000000">
+            <Border Width="350" Height="250" BorderBrush="Chartreuse" BorderThickness="2" CornerRadius="10"
+                    Background="#202020" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+                    <TextBlock Text="No function yet" FontSize="18" Foreground="Chartreuse" HorizontalAlignment="Center"/>
+                    <Button Content="OK" Foreground="Chartreuse" HorizontalAlignment="Center"/>
+                    <Button Content="Back" Command="{Binding closeCommand}" Foreground="Chartreuse" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+    </Grid>
 </UserControl>

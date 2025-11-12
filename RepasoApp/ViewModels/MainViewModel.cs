@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Avalonia.Collections;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RepasoApp.Data;
 using RepasoApp.Models;
 using RepasoApp.Services;
+using repasoFinal.Services;
 
 namespace RepasoApp.ViewModels;
 
@@ -13,6 +15,22 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] private string _greeting = "Welcome to Avalonia!";
     [ObservableProperty] private string imageURL;
     [ObservableProperty] private AvaloniaList<Usuario> listaUsuarios = new(); //del DBService.cs
+    [ObservableProperty] private AvaloniaList<ProductModel> listaProductos = new();
+    [ObservableProperty] private bool isOpen = false;
+    [ObservableProperty] private NavigationService navigationService = new();
+    
+    
+    [RelayCommand]
+    public void open()
+    {
+        IsOpen = true;
+    }
+    
+    [RelayCommand]
+    public void close()
+    {
+        IsOpen = false;
+    }
     
     //10/11 objeto api service, crear producto
     private ApiService apiService = new();
@@ -24,18 +42,21 @@ public partial class MainViewModel : ViewModelBase
             //id no ncesaria
             Ref = "123456",
             Diametro = 12.34m,//con la m se indica q es decimal
-            Peso = 100.23m,
-            Color = "Rosa"
+            Peso = 10.23m,
+            Color = "Rojo"
         };
         //debería insertar al ejecutar el command de este metodo, poner un boton en el mainview que llame a esto
         await apiService.CrearProducto(p);
+        await ObtenerProductoAsync();//y modificamos la lista
     }
+
+    
     
     //command obtener
     [RelayCommand]
     public async Task ObtenerProductoAsync()
     {
-        var listaProductos = await apiService.GetProductos();
+        ListaProductos = await apiService.GetProductos();
     }
 
     [RelayCommand]
@@ -64,4 +85,57 @@ public partial class MainViewModel : ViewModelBase
            ImageURL = u.ImageUrl; 
         }
     }
+
+    [RelayCommand]
+    public async Task ModificarProductoAsync(ProductModel producto) //viene de apiservice
+    {
+        if (producto == null)
+        {
+            Console.WriteLine("No seleccinaste nada");
+            return;
+        }
+
+        try
+        {
+            producto.Ref = "REF MODIFICADA";
+            bool ok = await apiService.ModificarProducto(producto);
+            if (ok)
+            {
+                Console.WriteLine("Producto Modificado");
+                await ObtenerProductoAsync();//y modificamos la lista
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error al actualizar" + e.Message);
+            throw;
+        }
+    }
+    
+    [RelayCommand]
+    public async Task EliminarProductoAsync(ProductModel producto) //viene de apiservice
+    {
+        if (producto == null)
+        {
+            Console.WriteLine("No seleccinaste nada");
+            return;
+        }
+
+        try
+        {
+            bool ok = await apiService.EliminarProducto(producto);
+            if (ok)
+            {
+                Console.WriteLine("Producto ELIMINADO");
+                await ObtenerProductoAsync();//y modificamos la lista
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error al ELIMINAR" + e.Message);
+            throw;
+        }
+    }
+    
+    
 }
