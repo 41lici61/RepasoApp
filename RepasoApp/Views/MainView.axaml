@@ -49,10 +49,10 @@
 
             <Button FontFamily="Consolas" Content="Crear Producto" Command="{Binding CrearProductoCommand}" Foreground="Chartreuse"/>
             <Button FontFamily="Consolas" Content="Obtener Producto" Command="{Binding ObtenerProductoCommand}" Foreground="Chartreuse"/>
-            <Button FontFamily="Consolas" Content="Actualizar Producto" Command="{Binding ModificarProductoCommand}"
+            <!--<Button FontFamily="Consolas" Content="Actualizar Producto" Command="{Binding ModificarProductoCommand}"
                     CommandParameter="{Binding ElementName=ListaProductos, Path=SelectedItem}" Foreground="Chartreuse"/>
             <Button FontFamily="Consolas" Content="Eliminar Producto" Command="{Binding EliminarProductoCommand}"
-                    CommandParameter="{Binding ElementName=ListaProductos, Path=SelectedItem}" Foreground="Chartreuse"/>
+                    CommandParameter="{Binding ElementName=ListaProductos, Path=SelectedItem}" Foreground="Chartreuse"/>-->
         </StackPanel>
 
         <!-- Panel derecho (listas y resultados) -->
@@ -79,7 +79,7 @@
                 </ListBox>
 
                 <!-- Lista de productos -->
-                <TextBlock Text="Productos" Foreground="Chartreuse" FontFamily="Consolas" FontSize="20"/>
+                <!--<TextBlock Text="Productos" Foreground="Chartreuse" FontFamily="Consolas" FontSize="20"/>
                 <ListBox Background="OliveDrab" Name="ListaProductos" ItemsSource="{Binding ListaProductos}" Height="250">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -96,21 +96,10 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </ListBox>
+                </ListBox>-->
+                
             </StackPanel>
         </ScrollViewer>
-
-        <!-- Overlay modal (solo visible cuando IsOpen es true) -->
-        <Grid x:Name="Overlay" IsVisible="{Binding IsOpen}" Background="#80000000">
-            <Border Width="350" Height="250" BorderBrush="Chartreuse" BorderThickness="2" CornerRadius="10"
-                    Background="#202020" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-                    <TextBlock Text="No function yet" FontSize="18" Foreground="Chartreuse" HorizontalAlignment="Center"/>
-                    <Button Content="OK" Foreground="Chartreuse" HorizontalAlignment="Center"/>
-                    <Button Content="Back" Command="{Binding closeCommand}" Foreground="Chartreuse" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-        </Grid>
 
     </Grid>
 </UserControl>

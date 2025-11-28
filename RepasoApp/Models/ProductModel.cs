@@ -1,22 +1,34 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
 namespace RepasoApp.Models;
 
 public class ProductModel
 {
-    //ponerle los atributos de la tabla de la bbdd del puerto 7000
-    //instalar Newtonsoft.Json
-    
-    [JsonProperty("id", DefaultValueHandling = DefaultValueHandling.Ignore)] public string Id { get; set; } 
-    
-    [JsonProperty("ref")] public string Ref { get; set; }
-    [JsonProperty("color")] public string Color { get; set; }
-    [JsonProperty("peso")] public decimal Peso { get; set; }
-    [JsonProperty("diametro")] public decimal Diametro { get; set; }
-    
-    //metodo insertar en el apiservice, se le pasa un producto lo transforma y lo inserta
-    
-    
-    
+    [JsonProperty("id", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public string Id { get; set; } // supabase usa id tipo text/uuid; en las peticiones lo usamos como string
+
+    [Required(ErrorMessage = "Código de barras requerido")]
+    [JsonProperty("codigo_barras")]
+    public string CodigoBarras { get; set; }
+
+    [Required(ErrorMessage = "Descripción requerida")]
+    [StringLength(200)]
+    [JsonProperty("descripcion")]
+    public string Descripcion { get; set; }
+
+    [Range(0, int.MaxValue, ErrorMessage = "Cantidad debe ser >= 0")]
+    [JsonProperty("cantidad")]
+    public int Cantidad { get; set; }
+
+    [Required]
+    [JsonProperty("categoria")]
+    public string Categoria { get; set; }
+
+    [JsonProperty("fecha_entrada")]
+    public DateTime FechaEntrada { get; set; } = DateTime.Now;
+
+    [JsonProperty("activo")]
+    public bool Activo { get; set; } = true;
 }
