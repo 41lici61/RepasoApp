@@ -1,7 +1,8 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:RepasoApp.ViewModels"
-             x:Class="RepasoApp.Views.AltaProductoView">
+             x:Class="RepasoApp.Views.AltaProductoView"
+             x:DataType="viewModels:AltaProductoViewModel">
     <Design.DataContext>
         <viewModels:AltaProductoViewModel />
     </Design.DataContext>
@@ -15,7 +16,7 @@
             <TextBlock Text="Cantidad"/>
             <NumericUpDown Minimum="0" Maximum="100000" Value="{Binding Producto.Cantidad}"/>
             <TextBlock Text="Categoría"/>
-            <ComboBox Items="{Binding Categorias}" SelectedItem="{Binding Producto.Categoria}"/>
+            <ComboBox ItemsSource="{Binding Categorias}" SelectedItem="{Binding Producto.Categoria}"/>
             <TextBlock Text="Fecha de entrada"/>
             <DatePicker SelectedDate="{Binding Producto.FechaEntrada}"/>
             <CheckBox Content="Activo" IsChecked="{Binding Producto.Activo}"/>

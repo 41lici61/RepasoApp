@@ -6,6 +6,9 @@ namespace RepasoApp.Models
 {
     public class ProductModel
     {
+        
+        
+        
         [JsonProperty("id")]
         public long Id { get; set; }
 

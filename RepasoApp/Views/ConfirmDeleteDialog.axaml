@@ -1,9 +1,11 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:views="clr-namespace:RepasoApp.Views"
-             x:Class="RepasoApp.Views.ConfirmDeleteDialog">
+             xmlns:viewModels="clr-namespace:RepasoApp.ViewModels"
+             x:Class="RepasoApp.Views.ConfirmDeleteDialog"
+             x:DataType="viewModels:ConfirmDeleteViewModel">
     <Design.DataContext>
-        <views:ConfirmDeleteDialog />
+        <viewModels:ConfirmDeleteViewModel />
     </Design.DataContext>
     <StackPanel Spacing="8" Width="360">
         <TextBlock Text="Confirmar eliminación" FontSize="18"/>

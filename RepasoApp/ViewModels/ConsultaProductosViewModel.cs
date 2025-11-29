@@ -16,12 +16,20 @@ namespace RepasoApp.ViewModels
         private readonly ApiService _api = new ApiService();
 
         [ObservableProperty] private AvaloniaList<ProductModel> listaProductos = new();
-        [ObservableProperty] private ProductModel productoSeleccionado;
-        [ObservableProperty] private string mensaje;
+        [ObservableProperty] private ProductModel productoSeleccionado = null!;
+        [ObservableProperty] private string mensaje = null!;
+
+        
 
         public ConsultaProductosViewModel(NavigationService navigationService)
         {
             _navigationService = navigationService;
+            _ = Refrescar();
+        }
+        
+        public ConsultaProductosViewModel()
+        {
+            _navigationService = new NavigationService();
             _ = Refrescar();
         }
 
@@ -40,10 +48,10 @@ namespace RepasoApp.ViewModels
         }
 
         [RelayCommand]
-        public async Task Editar(ProductModel producto)
+        public async Task Editar()
         {
-            if (producto == null) return;
-            var vm = new EditarProductoViewModel(producto);
+            if (ProductoSeleccionado == null) return;
+            var vm = new EditarProductoViewModel(ProductoSeleccionado);
             var dialog = new Views.EditarProductoDialog { DataContext = vm };
             var result = await DialogHost.Show(dialog, "RootDialog");
             if (result is bool updated && updated)
@@ -53,17 +61,17 @@ namespace RepasoApp.ViewModels
         }
 
         [RelayCommand]
-        public async Task Eliminar(ProductModel producto)
+        public async Task Eliminar()
         {
-            if (producto == null) return;
-            var vm = new ConfirmDeleteViewModel(producto);
+            if (ProductoSeleccionado == null) return;
+            var vm = new ConfirmDeleteViewModel(ProductoSeleccionado);
             var dialog = new Views.ConfirmDeleteDialog { DataContext = vm };
             var result = await DialogHost.Show(dialog, "RootDialog");
             if (result is bool ok && ok)
             {
                 try
                 {
-                    bool deleted = await _api.EliminarProducto(producto.Id);
+                    bool deleted = await _api.EliminarProducto(ProductoSeleccionado.Id);
                     if (deleted)
                     {
                         Mensaje = "Producto eliminado";

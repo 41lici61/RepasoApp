@@ -1,7 +1,8 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:RepasoApp.ViewModels"
-             x:Class="RepasoApp.Views.EditarProductoDialog">
+             x:Class="RepasoApp.Views.EditarProductoDialog"
+             x:DataType="viewModels:EditarProductoViewModel">
     <Design.DataContext>
         <viewModels:EditarProductoViewModel />
     </Design.DataContext>

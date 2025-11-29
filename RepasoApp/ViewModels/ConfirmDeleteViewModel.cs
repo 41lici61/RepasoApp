@@ -7,7 +7,7 @@ namespace RepasoApp.ViewModels
 {
     public partial class ConfirmDeleteViewModel : ObservableObject
     {
-        [ObservableProperty] private string textoConfirmacion;
+        [ObservableProperty] public string textoConfirmacion;
         private readonly ProductModel _producto;
 
         public ConfirmDeleteViewModel(ProductModel producto)

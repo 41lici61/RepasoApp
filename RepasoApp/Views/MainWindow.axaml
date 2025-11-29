@@ -1,31 +1,71 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:fa="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+        xmlns:fa="using:FluentAvalonia.UI.Controls"
+        xmlns:faicons="using:FluentAvalonia.UI.Controls"
+        xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
         xmlns:views="clr-namespace:RepasoApp.Views"
-        xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
         x:Class="RepasoApp.MainWindow"
         Width="1100" Height="700"
         Title="RepasoApp">
-        
-        
-        <dialogHostAvalonia:DialogHost Identifier="RootDialog">
-                <fa:NavigationView x:Name="NavView" PaneDisplayMode="Left" IsBackButtonVisible="Collapsed">
-                        <fa:NavigationView.PaneHeader>
-                                <TextBlock Text="RepasoApp" FontSize="18" Margin="10"/>
-                        </fa:NavigationView.PaneHeader>
 
-                        <fa:NavigationView.MenuItems>
-                                <fa:NavigationViewItem Icon="Home" Content="Inicio" Tag="Welcome" />
-                                <fa:NavigationViewItem Icon="Add" Content="Alta producto" Tag="AltaProducto" />
-                                <fa:NavigationViewItem Icon="List" Content="Consulta productos" Tag="ConsultaProductos" />
-                                <fa:NavigationViewItem Icon="SignOut" Content="Logout" Tag="Logout" />
-                        </fa:NavigationView.MenuItems>
+    <dialogHost:DialogHost Identifier="RootDialog">
 
-                        <fa:NavigationView.Content>
-                                <ContentControl x:Name="ContentHolder" />
-                        </fa:NavigationView.Content>
-                </fa:NavigationView>
-        </dialogHostAvalonia:DialogHost>
+        <fa:NavigationView x:Name="NavView"
+                           PaneDisplayMode="Left"
+                           IsBackButtonVisible="False">
+
+            <fa:NavigationView.PaneHeader>
+                <TextBlock Text="RepasoApp"
+                           FontSize="18"
+                           Margin="10"/>
+            </fa:NavigationView.PaneHeader>
+
+            <fa:NavigationView.MenuItems>
+
+                <!-- INICIO -->
+                <fa:NavigationViewItem Tag="Welcome">
+                    <fa:NavigationViewItem.IconSource>
+                        <faicons:SymbolIconSource Symbol="Home"/>
+                    </fa:NavigationViewItem.IconSource>
+                    <TextBlock Text="Inicio"/>
+                </fa:NavigationViewItem>
+
+                <!-- ALTA PRODUCTO -->
+                <fa:NavigationViewItem Tag="AltaProducto">
+                    <fa:NavigationViewItem.IconSource>
+                        <faicons:SymbolIconSource Symbol="Add"/>
+                    </fa:NavigationViewItem.IconSource>
+                    <TextBlock Text="Alta producto"/>
+                </fa:NavigationViewItem>
+
+                <!-- CONSULTA PRODUCTOS -->
+                <fa:NavigationViewItem Tag="ConsultaProductos">
+                    <fa:NavigationViewItem.IconSource>
+                        <faicons:SymbolIconSource Symbol="List"/>
+                    </fa:NavigationViewItem.IconSource>
+                    <TextBlock Text="Consulta productos"/>
+                </fa:NavigationViewItem>
+
+                <!-- LOGOUT -->
+                <fa:NavigationViewItem Tag="Logout">
+                    <fa:NavigationViewItem.IconSource>
+                        <faicons:SymbolIconSource Symbol="Account"/>
+                    </fa:NavigationViewItem.IconSource>
+                    <TextBlock Text="Logout"/>
+                </fa:NavigationViewItem>
+
+            </fa:NavigationView.MenuItems>
+
+            <fa:NavigationView.Content>
+                <ContentControl x:Name="ContentHolder"/>
+            </fa:NavigationView.Content>
+
+        </fa:NavigationView>
+
+    </dialogHost:DialogHost>
+
 </Window>
+
+
 
 
