@@ -15,7 +15,6 @@
     <PackageVersion Include="Avalonia.iOS" Version="11.3.6" />
     <PackageVersion Include="Avalonia.Browser" Version="11.3.6" />
     <PackageVersion Include="Avalonia.Android" Version="11.3.6" />
-    <PackageVersion Include="Avalonia.Xaml.Behaviors" Version="11.3.0.6" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="DialogHost.Avalonia" Version="0.10.2" />
     <PackageVersion Include="Duende.IdentityModel.OidcClient" Version="7.0.0-preview.2" />
@@ -26,5 +25,6 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.0-rc.2.25502.107" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.15" />
+    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.9" />
   </ItemGroup>
 </Project>

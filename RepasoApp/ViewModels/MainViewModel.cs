@@ -6,7 +6,6 @@ using CommunityToolkit.Mvvm.Input;
 using RepasoApp.Data;
 using RepasoApp.Models;
 using RepasoApp.Services;
-using repasoFinal.Services;
 
 namespace RepasoApp.ViewModels;
 
