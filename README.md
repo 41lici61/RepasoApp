@@ -1,3 +1,4 @@
+<img width="859" height="470" alt="image" src="https://github.com/user-attachments/assets/6d6f788d-4c2b-4a19-829a-6ab83474ec4e" />
   
 
 Proyecto de gestión de productos
