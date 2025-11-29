@@ -1,0 +1,26 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:RepasoApp.ViewModels"
+             x:Class="RepasoApp.Views.EditarProductoDialog">
+    <Design.DataContext>
+        <viewModels:EditarProductoViewModel />
+    </Design.DataContext>
+    <StackPanel  Spacing="8" Width="420">
+        <TextBlock Text="Editar producto" FontSize="18"/>
+        <TextBlock Text="Código de barras"/>
+        <TextBox Text="{Binding Editable.CodigoBarras, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Descripción"/>
+        <TextBox Text="{Binding Editable.Descripcion, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Cantidad"/>
+        <NumericUpDown Minimum="0" Maximum="100000" Value="{Binding Editable.Cantidad}"/>
+        <TextBlock Text="Categoría"/>
+        <TextBox Text="{Binding Editable.Categoria, UpdateSourceTrigger=PropertyChanged}"/>
+        <CheckBox Content="Activo" IsChecked="{Binding Editable.Activo}"/>
+        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+            <Button Content="Aceptar" Command="{Binding AceptarCommand}" Width="100"/>
+            <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="100"/>
+        </StackPanel>
+        <TextBlock Text="{Binding Mensaje}" Foreground="Red"/>
+    </StackPanel>
+</UserControl>
+

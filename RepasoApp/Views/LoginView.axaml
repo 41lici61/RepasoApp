@@ -1,0 +1,17 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RepasoApp.Views.LoginView"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:RepasoApp.ViewModels"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:LoginViewModel />
+    </Design.DataContext>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12" Width="360">
+        <TextBlock Text="Inicia sesión con Google" FontSize="20" HorizontalAlignment="Center"/>
+        <Button Content="Sign in with Google" Command="{Binding LoginCommand}" HorizontalAlignment="Center" Width="220"/>
+        <TextBlock Text="{Binding Message}" Foreground="Red" TextWrapping="Wrap"/>
+    </StackPanel>
+</UserControl>
+

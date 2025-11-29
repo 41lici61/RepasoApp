@@ -1,0 +1,34 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:RepasoApp.ViewModels"
+             x:Class="RepasoApp.Views.ConsultaProductosView">
+    <Design.DataContext>
+        <viewModels:ConsultaProductosViewModel />
+    </Design.DataContext>
+    <StackPanel  Spacing="8">
+        <TextBlock Text="Consulta de productos" FontSize="22"/>
+        <Button Content="Refrescar" Command="{Binding RefrescarCommand}" Width="120"/>
+        <ListBox Items="{Binding ListaProductos}" SelectedItem="{Binding ProductoSeleccionado}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="6" Margin="4" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <StackPanel Width="380">
+                                <TextBlock Text="{Binding CodigoBarras}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Descripcion}" />
+                                <TextBlock Text="Cantidad: {Binding Cantidad}" />
+                                <TextBlock Text="Categoría: {Binding Categoria}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Spacing="6">
+                                <Button Content="Editar" Command="{Binding DataContext.EditarCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Width="80"/>
+                                <Button Content="Eliminar" Command="{Binding DataContext.EliminarCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Width="80"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Text="{Binding Mensaje}" Foreground="Red"/>
+    </StackPanel>
+</UserControl>
+
